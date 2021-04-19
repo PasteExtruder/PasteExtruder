@@ -1,0 +1,63 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Aug 27 10:21:02 2020
+
+@author: dj-leech
+"""
+
+def listToString(s):  
+    
+    # initialize an empty string 
+    str1 = ""  
+    
+    # traverse in the string   
+    for ele in s:  
+        str1 += ele + '\n'
+    
+    # return string   
+    return str1 
+
+import re
+
+objectname = 'NegativeShapes'
+
+# stri = open('StepWedge.gcode', 'r').read()
+# stri = open('Shapes.gcode', 'r').read()
+# stri = open('Spiral.gcode', 'r').read()
+# stri = open('Cup.gcode', 'r').read()
+stri = open(objectname + '.gcode', 'r').read()
+# print(str)
+
+strlist = stri.splitlines()
+
+for i in range(len(strlist)):
+    # print(i)
+    if 'G0' in strlist[i]:
+        # print('Found!')
+        strlist[i] = re.sub('E', 'E-', strlist[i])
+        strlist[i] = re.sub('--', '-', strlist[i])
+    if 'G1' in strlist[i]:
+        # print('Found!')
+        strlist[i] = re.sub('E', 'E-', strlist[i])
+        strlist[i] = re.sub('--', '-', strlist[i])
+    if 'G2' in strlist[i]:
+        # print('Found!')
+        strlist[i] = re.sub('E', 'E-', strlist[i])
+        strlist[i] = re.sub('--', '-', strlist[i])
+    if 'G3' in strlist[i]:
+        # print('Found!')
+        strlist[i] = re.sub('E', 'E-', strlist[i])
+        strlist[i] = re.sub('--', '-', strlist[i])
+        
+
+strlist = listToString(strlist) 
+
+# text_file = open("StepWedge2.gcode", "w")
+# text_file = open("Shapes2.gcode", "w")
+# text_file = open("Spiral2.gcode", "w")
+# text_file = open("Cup2.gcode", "w")
+text_file = open(objectname + '2.gcode', 'w')
+n = text_file.write(strlist)
+
+text_file.close()
